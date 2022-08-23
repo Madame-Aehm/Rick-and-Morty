@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Styles from './Styles.css';
 import TextField from '@mui/material/TextField';
+import CreateCards from './CreateCards';
 
-export default function Banner() {
+export default function Banner(characters) {
+  function handleInput(e) {
+    const newCharacterArray = [];
+    characters.characters.map((character) => {
+      if (character.name.includes(e.target.value)) {
+        newCharacterArray.push(character);
+      }
+    })
+    console.log(newCharacterArray);
+    //now what?
+
+  }
+
+
   return (
     <div className='banner'>
       <TextField 
@@ -18,8 +32,10 @@ export default function Banner() {
             borderColor: 'white',
           }
         }}
+        onChange={handleInput}
       />
     </div>
-    
   )
+
+
 }

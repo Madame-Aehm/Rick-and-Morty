@@ -64,3 +64,35 @@ img {
     height: auto;
 }
 
+.character-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 400px;
+    height: fit-content;
+    background-color: white;
+    border: solid 4px #a8004e;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.character-modal > img {
+    width: 300px;
+}
+
+.character-modal > button {
+    background-color: #a8004e;
+    color: black;
+}
+
+.arrows-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}

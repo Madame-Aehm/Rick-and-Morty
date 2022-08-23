@@ -1,12 +1,10 @@
-import { Button, InputLabel, Typography } from '@mui/material';
-import React from 'react';
+import { Typography } from '@mui/material';
 import CreateModals from './CreateModals';
 import Styles from './Styles.css';
+import React, { useEffect, useState } from 'react'
 
 export default function CreateCards(character, i) {
-
-
-
+    
   return (
     <div className='flip-card' key={i}>
         <div className='card-inner'>
@@ -15,15 +13,9 @@ export default function CreateCards(character, i) {
             </div>
             <div className='card-back'>
                 <Typography variant="h5" gutterBottom>{character.name}</Typography>
-                <Button variant="text" onClick={CreateModals(character)}>
-                    <Typography gutterBottom color='white'>Learn More</Typography>
-                </Button>
+                <CreateModals character={character}/>
             </div>
         </div>
-
-
-
-
     </div>
   )
 }
