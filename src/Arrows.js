@@ -2,20 +2,19 @@ import React, { useEffect, useState } from 'react'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { IconButton } from '@mui/material';
-import makeFetch from './Characters';
 
 export default function (info) {
   const next = info.info.next;
   const prev = info.info.prev;
 
  const testing = () => {
-  console.log("would make new fetch now") //ugh does nothing i don't understand
+  console.log("would make new fetch now")
 } 
 
   const handlePageBack = () => {
     if (prev !== null) {
       return (
-        <IconButton onClick={testing}>
+        <IconButton>
           <ArrowBackIosIcon sx={{ color: '#a8004e' }}/>
         </IconButton>
       )
@@ -27,7 +26,7 @@ export default function (info) {
   const handlePageForward = () => {
     if (next !== null) {
       return (
-        <IconButton>
+        <IconButton onClick={testing}>
           <ArrowForwardIosIcon sx={{ color: '#a8004e' }}/>
         </IconButton>
       )
@@ -40,7 +39,7 @@ export default function (info) {
 
   return (
     <div className='arrows-container'>
-
+      
       {handlePageBack()}
       {handlePageForward()}
      
