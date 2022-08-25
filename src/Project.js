@@ -16,12 +16,16 @@ export default function CompileCharacters() {
         try {
             const response = await fetch(URL);
             const result = await response.json();
-            setAllCharacters(result.results);
-            // filterCheck(result); //doing something weird... showing results from prev page until change
-            setCharacters(result.results);
             setInfo(result.info)
+            setAllCharacters(result.results);
+            const input = document.getElementById("outlined-basic");
+            if (input.value) {
+              applyFilter(input) // allcharacters and characters don't update here
+            } else {
+              setCharacters(result.results);
+            }
         } catch (error) {
-            console.log("error", error);
+            console.log("error: ", error);
         }
     };
 
@@ -29,29 +33,16 @@ export default function CompileCharacters() {
         makeFetch('https://rickandmortyapi.com/api/character/');
     }, []);
 
-    
-    function filterCheck(result) {
-      const filterInput = document.getElementById("outlined-basic");
-      if (filterInput.value) {
-        const charClone = [...allCharacters];
-      const newCharacterArray = charClone.filter(char => char.name.includes(filterInput.value))
-      setCharacters(newCharacterArray);
-      } else {
-        setCharacters(result.results);
-      }
-    }
-
-    function handleInput(e) {
+    function applyFilter(input) {
       const charClone = [...allCharacters];
-      const inputValue = e.target.value.toLowerCase();
-      const newCharacterArray = charClone.filter(char => char.name.toLowerCase().includes(inputValue))
+
+      const inputValue = input.value.toLowerCase();
+      const newCharacterArray = charClone.filter(char => char.name.toLowerCase().includes(inputValue));
       setCharacters(newCharacterArray);
     }
-
-    const next = info.next;
-    const prev = info.prev;
 
     const handlePageBack = () => {
+      const prev = info.prev;
         if (prev !== null) {
           return (
             <IconButton onClick={() => makeFetch(prev)}>
@@ -64,6 +55,7 @@ export default function CompileCharacters() {
       }
     
       const handlePageForward = () => {
+        const next = info.next;
         if (next !== null) {
           return (
             <IconButton onClick={() => makeFetch(next)}>
@@ -91,7 +83,7 @@ export default function CompileCharacters() {
                     borderColor: 'white',
                 }
                 }}
-                onChange={handleInput}
+                onChange={(e) => applyFilter(e.target)}
             />      
         </div>
 
