@@ -17,6 +17,7 @@ export default function CompileCharacters() {
             const response = await fetch(URL);
             const result = await response.json();
             setAllCharacters(result.results);
+            // filterCheck(result); //doing something weird... showing results from prev page until change
             setCharacters(result.results);
             setInfo(result.info)
         } catch (error) {
@@ -28,9 +29,22 @@ export default function CompileCharacters() {
         makeFetch('https://rickandmortyapi.com/api/character/');
     }, []);
 
+    
+    function filterCheck(result) {
+      const filterInput = document.getElementById("outlined-basic");
+      if (filterInput.value) {
+        const charClone = [...allCharacters];
+      const newCharacterArray = charClone.filter(char => char.name.includes(filterInput.value))
+      setCharacters(newCharacterArray);
+      } else {
+        setCharacters(result.results);
+      }
+    }
+
     function handleInput(e) {
       const charClone = [...allCharacters];
-      const newCharacterArray = charClone.filter(char => char.name.includes(e.target.value))
+      const inputValue = e.target.value.toLowerCase();
+      const newCharacterArray = charClone.filter(char => char.name.toLowerCase().includes(inputValue))
       setCharacters(newCharacterArray);
     }
 
