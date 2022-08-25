@@ -1,6 +1,5 @@
 import { Typography } from '@mui/material';
 import CreateModals from './CreateModals';
-import Styles from './Styles.css';
 import React, { useEffect, useState } from 'react'
 
 export default function CreateCards(character, i) {

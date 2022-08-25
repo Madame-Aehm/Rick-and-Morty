@@ -11,3 +11,106 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.banner {
+  background-color: #a8004e;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.cards-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.flip-card {
+  background-color: transparent;
+  margin: 20px;
+  border: solid 2px #a8004e;
+  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.card-front {
+  background-color: #a8004e;
+}
+
+.card-back {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #a8004e;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.character-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 400px;
+  height: fit-content;
+  background-color: white;
+  border: solid 4px #a8004e;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.character-modal > img {
+  width: 300px;
+}
+
+.character-modal > button {
+  background-color: #a8004e;
+  color: black;
+}
+
+.arrows-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.arrows-container > svg {
+  padding: 8px;
+}
