@@ -18,9 +18,10 @@ export default function CompileCharacters() {
             const result = await response.json();
             setInfo(result.info)
             setAllCharacters(result.results);
+            const fetchFilterArray = result.results;
             const input = document.getElementById("outlined-basic");
             if (input.value) {
-              applyFilter(input) // allcharacters and characters don't update here
+              fetchFilter(input, fetchFilterArray) // allcharacters and characters don't update here
             } else {
               setCharacters(result.results);
             }
@@ -29,13 +30,18 @@ export default function CompileCharacters() {
         }
     };
 
+    function fetchFilter(input, array) {
+      const inputValue = input.value.toLowerCase();
+      const newCharacterArray = array.filter(char => char.name.toLowerCase().includes(inputValue));
+      setCharacters(newCharacterArray);
+    }
+
     useEffect(() => {
         makeFetch('https://rickandmortyapi.com/api/character/');
     }, []);
 
-    function applyFilter(input) {
+    function inputFilter(input) {
       const charClone = [...allCharacters];
-
       const inputValue = input.value.toLowerCase();
       const newCharacterArray = charClone.filter(char => char.name.toLowerCase().includes(inputValue));
       setCharacters(newCharacterArray);
@@ -83,7 +89,7 @@ export default function CompileCharacters() {
                     borderColor: 'white',
                 }
                 }}
-                onChange={(e) => applyFilter(e.target)}
+                onChange={(e) => inputFilter(e.target)}
             />      
         </div>
 
